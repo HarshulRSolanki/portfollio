@@ -35,7 +35,7 @@ export const personalInfo = {
     linkedin: "https://www.linkedin.com/in/harshulr2k6",
     // Configurable contact details (via .env; do not hardcode private info)
     email: import.meta.env.VITE_CONTACT_EMAIL || "harshulrsolanki@gmail.com",
-    phone: import.meta.env.VITE_CONTACT_PHONE || "7984325605",
+    phone: import.meta.env.VITE_CONTACT_PHONE || "",
   },
 
   // Configurable Contact Form Endpoint (e.g. Formspree via .env)
