@@ -146,17 +146,16 @@ export default function Projects({ onSelectProject }) {
         </div>
 
         {/* Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-12">
           {filterOptions.map((option) => (
             <button
               type="button"
               key={option}
               onClick={() => setFilter(option)}
-              className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${
-                filter === option
+              className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${filter === option
                   ? 'bg-[var(--accent-primary)] text-white shadow-md font-semibold'
                   : 'bg-[var(--bg-card)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-color)] hover:border-[var(--accent-primary)]'
-              }`}
+                }`}
             >
               {option}
             </button>
@@ -164,7 +163,15 @@ export default function Projects({ onSelectProject }) {
         </div>
 
         {/* Responsive Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+        <div
+          className={`grid gap-7 ${
+            filteredProjects.length === 1
+              ? 'grid-cols-1 max-w-xl mx-auto'
+              : filteredProjects.length === 2
+              ? 'grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto'
+              : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+          }`}
+        >
           {filteredProjects.map((project) => {
             const ghInfo = getProjectGitHubInfo(project);
             const targetGithubUrl = ghInfo.repoUrl || ghInfo.canonicalUrl;
@@ -172,9 +179,9 @@ export default function Projects({ onSelectProject }) {
             return (
               <article
                 key={project.id}
-                className="premium-card rounded-2xl flex flex-col justify-between group overflow-hidden"
+                className="premium-card rounded-2xl flex flex-col justify-between h-full group overflow-hidden"
               >
-                <div>
+                <div className="flex-1 flex flex-col">
                   {/* Project Screenshot / Interactive Visual Preview */}
                   <ProjectVisual
                     type={project.visualType}
@@ -183,7 +190,7 @@ export default function Projects({ onSelectProject }) {
                   />
 
                   {/* Content */}
-                  <div className="p-6">
+                  <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center justify-between gap-2 mb-3">
                       <span className="px-2.5 py-1 rounded-md ocean-badge text-[11px] font-mono">
                         {project.category}
@@ -194,14 +201,14 @@ export default function Projects({ onSelectProject }) {
                       {project.title}
                     </h3>
 
-                    <p className="mt-2.5 text-sm text-[var(--text-secondary)] leading-relaxed">
+                    <p className="mt-3 text-sm text-[var(--text-secondary)] leading-relaxed">
                       {project.description}
                     </p>
 
                     {/* Top Features */}
-                    <ul className="mt-4 space-y-1.5">
-                      {project.features.slice(0, 3).map((feature, index) => (
-                        <li key={index} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
+                    <ul className="mt-4 space-y-2">
+                      {project.features.slice(0, 4).map((feature, index) => (
+                        <li key={index} className="flex items-start gap-2.5 text-xs text-[var(--text-secondary)] leading-relaxed">
                           <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-secondary)] shrink-0 mt-0.5" />
                           <span>{feature}</span>
                         </li>
@@ -209,15 +216,14 @@ export default function Projects({ onSelectProject }) {
                     </ul>
 
                     {/* Technology Tags */}
-                    <div className="mt-5 flex flex-wrap gap-1.5">
+                    <div className="mt-auto pt-5 flex flex-wrap gap-1.5">
                       {project.technologies.map((tech, idx) => (
                         <span
                           key={tech}
-                          className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium border bg-[var(--bg-primary)] border-[var(--border-color)] ${
-                            idx % 2 === 0
+                          className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium border bg-[var(--bg-primary)] border-[var(--border-color)] ${idx % 2 === 0
                               ? 'text-[var(--text-primary)] group-hover:border-[var(--accent-primary)]'
                               : 'text-[var(--text-secondary)] group-hover:border-[var(--accent-secondary)]'
-                          } transition-colors`}
+                            } transition-colors`}
                         >
                           {tech}
                         </span>
@@ -232,18 +238,6 @@ export default function Projects({ onSelectProject }) {
 
                   {/* Action Footer */}
                   <div className="px-6 pb-6 pt-4 border-t border-[var(--border-color)] flex flex-wrap items-center gap-2.5">
-                    {project.demoUrl && (
-                      <a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white text-xs font-semibold shadow-md transition-all"
-                      >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                        <span>Live Demo</span>
-                      </a>
-                    )}
-
                     {ghInfo.isValid && targetGithubUrl ? (
                       <a
                         href={targetGithubUrl}
@@ -251,14 +245,26 @@ export default function Projects({ onSelectProject }) {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[var(--bg-primary)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] text-xs font-semibold transition-all"
                       >
-                        <Github className="w-3.5 h-3.5" />
-                        <span>{ghInfo.isRepo ? 'GitHub' : 'GitHub Profile'}</span>
+                        <Github className="w-3.5 h-3.5 shrink-0" />
+                        <span>{ghInfo.isRepo ? 'GitHub Repository' : 'GitHub Profile'}</span>
                       </a>
                     ) : (
                       <span className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] text-xs font-medium opacity-75">
-                        <Github className="w-3.5 h-3.5" />
+                        <Github className="w-3.5 h-3.5 shrink-0" />
                         <span>Repo Unavailable</span>
                       </span>
+                    )}
+
+                    {project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white text-xs font-semibold shadow-md transition-all"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                        <span>Live Demo</span>
+                      </a>
                     )}
 
                     <button
@@ -266,8 +272,8 @@ export default function Projects({ onSelectProject }) {
                       onClick={() => onSelectProject(project)}
                       className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[var(--accent-secondary-soft)] hover:bg-[var(--accent-secondary)] border border-[var(--accent-secondary-border)] text-[var(--accent-secondary-badge-text)] hover:text-white text-xs font-semibold transition-all ml-auto"
                     >
-                      <Eye className="w-3.5 h-3.5" />
-                      <span>Details</span>
+                      <Eye className="w-3.5 h-3.5 shrink-0" />
+                      <span>View Details</span>
                     </button>
                   </div>
                 </div>

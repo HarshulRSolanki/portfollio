@@ -162,21 +162,22 @@ export const projects = [
     shortTitle: "UMCAO",
     category: "Code Analysis & Optimization",
     description:
-      "A code analysis and optimization platform designed to identify inefficient programming patterns, analyze code, provide optimization suggestions, and evaluate performance.",
-    technologies: ["React.js", "Tailwind CSS", "Python", "FastAPI", "AST", "Chart.js"],
+      "A multi-language code analysis and optimization platform designed to detect inefficient coding patterns, analyze code quality, provide optimization suggestions, and compare performance metrics.",
+    technologies: ["React.js", "Tailwind CSS", "Python", "FastAPI", "Python AST", "Chart.js"],
     features: [
-      "Static code analysis across programming constructs.",
-      "Inefficient pattern detection inside source code.",
-      "Optimization suggestions for cleaner logic.",
-      "Complexity estimation for performance clarity.",
-      "Performance benchmarking & metric visualization.",
+      "Multi-language code analysis.",
+      "Detection of inefficient coding patterns.",
+      "Optimization suggestions with explanations.",
+      "Code execution and performance benchmarking.",
+      "Execution time and memory comparison.",
+      "Interactive performance dashboard.",
     ],
     architecture: {
       frontend: "React.js & Tailwind CSS interactive dashboard powered by Chart.js metrics.",
-      backend: "Python & FastAPI service performing AST parsing and static pattern checks.",
+      backend: "Python & FastAPI service performing Python AST parsing and static pattern checks.",
     },
     screenshotUrl: "", // Configurable path in /public
-    demoUrl: import.meta.env.VITE_UMCAO_DEMO_URL || "",
+    demoUrl: import.meta.env.VITE_UMCAO_DEMO_URL || "https://umcao.onrender.com/",
     githubUrl: import.meta.env.VITE_UMCAO_REPO_URL || "https://github.com/HarshulRSolanki/UMCAO",
     profileGithubFallback: "https://github.com/HarshulRSolanki/UMCAO",
     visualType: "umcao",
@@ -211,7 +212,7 @@ export const projects = [
 export const educationHistory = [
   {
     degree: "Master of Computer Applications (MCA)",
-    institution: "Gujarat Technological University (GTU)",
+    institution: "Anand Institute of Management and Information Science",
     duration: "Semester 3",
     status: "Currently Pursuing",
     location: "Gujarat, India",
@@ -224,8 +225,8 @@ export const educationHistory = [
   },
   {
     degree: "Bachelor of Computer Applications (BCA)",
-    institution: import.meta.env.VITE_BCA_COLLEGE || "Undergraduate Institution (Configurable via VITE_BCA_COLLEGE)",
-    duration: import.meta.env.VITE_BCA_DATES || "Completed Prior to MCA",
+    institution: import.meta.env.VITE_BCA_COLLEGE || "Dharmsinh Desai University",
+    duration: import.meta.env.VITE_BCA_DATES || "2022-2025",
     status: "Completed",
     location: "Gujarat, India",
     focus: "Programming Fundamentals (C, C++, Java), Databases & Web Basics",
