@@ -21,7 +21,7 @@ export const personalInfo = {
   role: "Full Stack Developer",
   educationTag: "MCA Student",
   currentEducation: "MCA Semester 3",
-  university: "Gujarat Technological University (GTU)",
+  university: "Anand Institute of Management And Information Science (AIMIS)",
   previousEducation: "Bachelor of Computer Applications (BCA)",
   location: "Nadiad, Gujarat, India",
   careerGoal: "Full Stack Developer Internship",
@@ -54,7 +54,7 @@ export const aboutStats = [
   {
     label: "Current Degree",
     value: "MCA Sem 3",
-    subtext: "Gujarat Technological University",
+    subtext: "Anand Institute of Management And Information Science",
     accent: "ocean",
   },
   {
@@ -81,10 +81,10 @@ export const aboutHighlights = [
   {
     id: "education",
     title: "Education Highlight",
-    subtitle: "MCA Semester 3 • GTU",
+    subtitle: "MCA Semester 3 • AIMIS",
     description:
-      "Pursuing Master of Computer Applications (Semester 3) at Gujarat Technological University following a Bachelor of Computer Applications (BCA) degree.",
-    badge: "GTU",
+      "Pursuing Master of Computer Applications (Semester 3) at Anand Institute of Management And Information Science following a Bachelor of Computer Applications (BCA) degree.",
+    badge: "AIMIS",
     icon: "GraduationCap",
   },
   {
@@ -218,7 +218,7 @@ export const educationHistory = [
     location: "Gujarat, India",
     focus: "Full Stack Web Development, Enterprise Java, Python APIs, DBMS & Software Engineering",
     highlights: [
-      "Currently pursuing MCA Semester 3 at Gujarat Technological University (GTU).",
+      "Currently pursuing MCA Semester 3 at Anand Institute of Management And Information Science (AIMIS).",
       "Building practical software projects spanning React, Spring Boot, FastAPI, and ASP.NET Core.",
       "Strengthening problem-solving skills through Data Structures, Algorithms, and OOP.",
     ],
