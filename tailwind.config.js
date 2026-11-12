@@ -8,33 +8,31 @@ export default {
   theme: {
     extend: {
       colors: {
-        void: '#0A0A0A',
-        surface: '#141414',
-        surfaceHover: '#1A1A1A',
-        borderDark: '#252525',
+        void: 'var(--bg-primary)',
+        surface: 'var(--bg-card)',
+        surfaceHover: 'var(--bg-elevated)',
+        borderDark: 'var(--border-color)',
         ocean: {
-          DEFAULT: '#007BA7',
-          hover: '#00648A',
-          light: '#0096CC',
-          glow: 'rgba(0, 123, 167, 0.3)',
+          DEFAULT: 'var(--accent-primary)',
+          hover: 'var(--accent-primary-hover)',
+          light: 'var(--accent-primary-badge-text)',
         },
         pinkAccent: {
-          DEFAULT: '#FF2D75',
-          hover: '#E02265',
-          light: '#FF5C93',
-          glow: 'rgba(255, 45, 117, 0.25)',
+          DEFAULT: 'var(--accent-secondary)',
+          hover: 'var(--accent-secondary-hover)',
+          light: 'var(--accent-secondary-badge-text)',
         },
-        textPrimary: '#FFFFFF',
-        textSecondary: '#A1A1AA',
+        textPrimary: 'var(--text-primary)',
+        textSecondary: 'var(--text-secondary)',
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'Fira Code', 'Consolas', 'monospace'],
       },
       boxShadow: {
-        'ocean-glow': '0 8px 30px -6px rgba(0, 123, 167, 0.35)',
-        'pink-glow': '0 8px 30px -6px rgba(255, 45, 117, 0.3)',
-        'card': '0 10px 30px -10px rgba(0, 0, 0, 0.65)',
+        'ocean-glow': 'var(--shadow-primary)',
+        'pink-glow': '0 8px 30px -6px var(--accent-secondary-soft)',
+        'card': 'var(--shadow-card)',
       },
       animation: {
         'pulse-slow': 'pulse 3.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',

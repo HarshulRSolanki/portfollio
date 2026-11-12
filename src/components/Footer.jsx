@@ -26,25 +26,25 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="border-t border-[#252525] bg-[#0A0A0A] relative z-10">
+      <footer className="border-t border-[var(--border-color)] bg-[var(--bg-primary)] relative z-10 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pb-8 border-b border-[#252525]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pb-8 border-b border-[var(--border-color)]">
 
             {/* Developer Logo & Short Professional Tagline */}
             <div className="md:col-span-5 space-y-3 text-center md:text-left">
               <div className="inline-flex items-center gap-3">
-                <div className="px-2.5 h-9 rounded-xl bg-[#141414] border border-[#252525] flex items-center justify-center">
-                  <span className="font-mono font-bold text-xs text-white">
-                    <span className="text-[#007BA7]">&lt;</span>
+                <div className="px-2.5 h-9 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] flex items-center justify-center transition-colors duration-300">
+                  <span className="font-mono font-bold text-xs text-[var(--text-primary)]">
+                    <span className="text-[var(--accent-primary)]">&lt;</span>
                     {personalInfo.initials}
-                    <span className="text-[#FF2D75]">/&gt;</span>
+                    <span className="text-[var(--accent-secondary)]">/&gt;</span>
                   </span>
                 </div>
-                <span className="text-base sm:text-lg font-bold text-white tracking-tight">
+                <span className="text-base sm:text-lg font-bold text-[var(--text-primary)] tracking-tight">
                   {personalInfo.displayName}
                 </span>
               </div>
-              <p className="text-xs sm:text-sm text-[#A1A1AA] max-w-sm mx-auto md:mx-0">
+              <p className="text-xs sm:text-sm text-[var(--text-secondary)] max-w-sm mx-auto md:mx-0">
                 Engineering scalable full-stack web applications and clean backend architectures.
               </p>
             </div>
@@ -56,7 +56,7 @@ export default function Footer() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => scrollToSection(e, link.href)}
-                  className="text-xs sm:text-sm text-[#A1A1AA] hover:text-[#007BA7] transition-colors"
+                  className="text-xs sm:text-sm text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors"
                 >
                   {link.name}
                 </a>
@@ -69,7 +69,7 @@ export default function Footer() {
                 href={personalInfo.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-[#141414] border border-[#252525] text-white hover:border-[#007BA7] hover:text-[#007BA7] transition-all"
+                className="p-2.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all"
                 aria-label="GitHub"
               >
                 <Github className="w-4 h-4" />
@@ -78,7 +78,7 @@ export default function Footer() {
                 href={personalInfo.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-[#141414] border border-[#252525] text-[#007BA7] hover:border-[#007BA7] hover:text-white transition-all"
+                className="p-2.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--accent-primary)] hover:border-[var(--accent-primary)] hover:bg-[var(--accent-primary)] hover:text-white transition-all"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
@@ -86,7 +86,7 @@ export default function Footer() {
               {personalInfo.social.email && (
                 <a
                   href={`mailto:${personalInfo.social.email}`}
-                  className="p-2.5 rounded-xl bg-[#141414] border border-[#252525] text-[#FF2D75] hover:border-[#FF2D75] hover:text-white transition-all"
+                  className="p-2.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--accent-secondary)] hover:border-[var(--accent-secondary)] hover:bg-[var(--accent-secondary)] hover:text-white transition-all"
                   aria-label="Email"
                 >
                   <Mail className="w-4 h-4" />
@@ -96,10 +96,10 @@ export default function Footer() {
           </div>
 
           {/* Copyright Row */}
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#A1A1AA]">
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--text-secondary)]">
             <p>© {currentYear} {personalInfo.name}. All rights reserved.</p>
-            <p className="flex items-center gap-1.5 font-medium text-white">
-              <Code2 className="w-3.5 h-3.5 text-[#007BA7]" />
+            <p className="flex items-center gap-1.5 font-medium text-[var(--text-primary)]">
+              <Code2 className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
               <span>Built with React, Tailwind CSS &amp; Framer Motion</span>
             </p>
           </div>
@@ -108,9 +108,10 @@ export default function Footer() {
 
       {/* Floating Back-to-Top Button */}
       <button
+        type="button"
         onClick={scrollToTop}
         aria-label="Back to top"
-        className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 p-3 rounded-xl bg-[#141414] border border-[#252525] hover:border-[#FF2D75] text-[#007BA7] hover:text-white hover:bg-[#007BA7] shadow-xl shadow-black/60 transition-all duration-300 ${
+        className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 p-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-[var(--accent-primary)] hover:text-white hover:bg-[var(--accent-primary)] shadow-xl transition-all duration-300 ${
           showBackToTop ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
       >

@@ -17,8 +17,12 @@ export default function Contact({ onShowToast }) {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [submitState, setSubmitState] = useState(null);
 
-  const hasEndpoint = Boolean(personalInfo.contactConfig.formEndpoint);
-  const hasEmail = Boolean(personalInfo.social.email);
+  const rawEndpoint = (personalInfo.contactConfig.formEndpoint || '').trim();
+  const hasEndpoint = /^https?:\/\//i.test(rawEndpoint);
+  const fallbackMailAddress =
+    personalInfo.social.email ||
+    (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEndpoint) ? rawEndpoint : '');
+  const hasEmail = Boolean(fallbackMailAddress);
 
   const validate = () => {
     const newErrors = {};
@@ -48,12 +52,12 @@ export default function Contact({ onShowToast }) {
   const handleCopyEmail = async () => {
     if (!hasEmail) return;
     try {
-      await navigator.clipboard.writeText(personalInfo.social.email);
+      await navigator.clipboard.writeText(fallbackMailAddress);
       setCopiedEmail(true);
       onShowToast({
         type: 'success',
         title: 'Email Copied',
-        message: `${personalInfo.social.email} copied to clipboard.`
+        message: `${fallbackMailAddress} copied to clipboard.`
       });
       setTimeout(() => setCopiedEmail(false), 2500);
     } catch {
@@ -90,7 +94,7 @@ export default function Contact({ onShowToast }) {
     if (hasEndpoint) {
       setIsSubmitting(true);
       try {
-        const response = await fetch(personalInfo.contactConfig.formEndpoint, {
+        const response = await fetch(rawEndpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -129,7 +133,7 @@ export default function Contact({ onShowToast }) {
     }
 
     if (hasEmail) {
-      const mailtoLink = `mailto:${personalInfo.social.email}?subject=${encodeURIComponent(
+      const mailtoLink = `mailto:${fallbackMailAddress}?subject=${encodeURIComponent(
         formData.subject
       )}&body=${encodeURIComponent(
         `Hi Harshul,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
@@ -157,14 +161,14 @@ export default function Contact({ onShowToast }) {
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141414] border border-[#252525] text-[#007BA7] text-xs font-mono mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-[#FF2D75]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--accent-primary)] text-xs font-mono mb-3 transition-colors duration-300">
+            <Sparkles className="w-3.5 h-3.5 text-[var(--accent-secondary)]" />
             <span>GET IN TOUCH</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Let's Build Something <span className="text-[#007BA7]">Amazing Together.</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">
+            Let's Build Something <span className="text-[var(--accent-primary)]">Amazing Together.</span>
           </h2>
-          <p className="mt-4 text-base text-[#A1A1AA] leading-relaxed">
+          <p className="mt-4 text-base text-[var(--text-secondary)] leading-relaxed">
             Actively seeking Full Stack Developer and Software Development Internships. Reach out to discuss opportunities or collaborate on projects.
           </p>
         </div>
@@ -175,69 +179,70 @@ export default function Contact({ onShowToast }) {
           <div className="lg:col-span-5 space-y-6">
             <div className="premium-card rounded-2xl p-6 sm:p-8 space-y-6">
               <div>
-                <h3 className="text-xl font-bold text-white mb-2">Contact Channels</h3>
-                <p className="text-sm text-[#A1A1AA]">
+                <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">Contact Channels</h3>
+                <p className="text-sm text-[var(--text-secondary)]">
                   Connect directly via email, LinkedIn, or GitHub.
                 </p>
               </div>
 
               <div className="space-y-4">
                 {/* Location */}
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-[#0A0A0A] border border-[#252525]">
-                  <div className="w-10 h-10 rounded-xl bg-[#007BA7]/15 border border-[#007BA7]/40 flex items-center justify-center text-[#007BA7] shrink-0">
+                <div className="flex items-start gap-4 p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] transition-colors duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-[var(--accent-primary-soft)] border border-[var(--accent-primary-border)] flex items-center justify-center text-[var(--accent-primary)] shrink-0">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs font-mono text-[#A1A1AA]">Location</p>
-                    <p className="text-sm font-semibold text-white mt-0.5">{personalInfo.location}</p>
+                    <p className="text-xs font-mono text-[var(--text-secondary)]">Location</p>
+                    <p className="text-sm font-semibold text-[var(--text-primary)] mt-0.5">{personalInfo.location}</p>
                   </div>
                 </div>
 
-                {/* Email Contact (Configurable) */}
-                <div className="flex items-start justify-between gap-3 p-4 rounded-xl bg-[#0A0A0A] border border-[#252525] hover:border-[#FF2D75]/50 transition-colors">
+                {/* Email Contact */}
+                <div className="flex items-start justify-between gap-3 p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] transition-colors">
                   <div className="flex items-start gap-4 min-w-0">
-                    <div className="w-10 h-10 rounded-xl bg-[#FF2D75]/10 border border-[#FF2D75]/35 flex items-center justify-center text-[#FF2D75] shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-[var(--accent-secondary-soft)] border border-[var(--accent-secondary-border)] flex items-center justify-center text-[var(--accent-secondary)] shrink-0">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-xs font-mono text-[#A1A1AA]">Email</p>
+                      <p className="text-xs font-mono text-[var(--text-secondary)]">Email</p>
                       {hasEmail ? (
                         <a
-                          href={`mailto:${personalInfo.social.email}`}
-                          className="text-sm font-semibold text-white hover:text-[#007BA7] transition-colors break-all mt-0.5 block"
+                          href={`mailto:${fallbackMailAddress}`}
+                          className="text-sm font-semibold text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors break-all mt-0.5 block"
                         >
-                          {personalInfo.social.email}
+                          {fallbackMailAddress}
                         </a>
                       ) : (
-                        <p className="text-xs text-[#A1A1AA] mt-1">
-                          Configurable via <code className="text-[#007BA7]">VITE_CONTACT_EMAIL</code>
+                        <p className="text-xs text-[var(--text-secondary)] mt-1">
+                          Configurable via <code className="text-[var(--accent-primary)]">VITE_CONTACT_EMAIL</code>
                         </p>
                       )}
                     </div>
                   </div>
                   {hasEmail && (
                     <button
+                      type="button"
                       onClick={handleCopyEmail}
-                      className="p-2 rounded-lg bg-[#141414] border border-[#252525] text-[#A1A1AA] hover:text-white hover:border-[#FF2D75] transition-colors shrink-0"
+                      className="p-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent-secondary)] transition-colors shrink-0"
                       aria-label="Copy Email Address"
                       title="Copy email"
                     >
-                      {copiedEmail ? <Check className="w-4 h-4 text-[#007BA7]" /> : <Copy className="w-4 h-4" />}
+                      {copiedEmail ? <Check className="w-4 h-4 text-[var(--accent-primary)]" /> : <Copy className="w-4 h-4" />}
                     </button>
                   )}
                 </div>
 
                 {/* Optional Phone */}
                 {personalInfo.social.phone && (
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-[#0A0A0A] border border-[#252525]">
-                    <div className="w-10 h-10 rounded-xl bg-[#007BA7]/15 border border-[#007BA7]/40 flex items-center justify-center text-[#007BA7] shrink-0">
+                  <div className="flex items-start gap-4 p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] transition-colors duration-300">
+                    <div className="w-10 h-10 rounded-xl bg-[var(--accent-primary-soft)] border border-[var(--accent-primary-border)] flex items-center justify-center text-[var(--accent-primary)] shrink-0">
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs font-mono text-[#A1A1AA]">Phone</p>
+                      <p className="text-xs font-mono text-[var(--text-secondary)]">Phone</p>
                       <a
                         href={`tel:${personalInfo.social.phone}`}
-                        className="text-sm font-semibold text-white hover:text-[#007BA7] transition-colors mt-0.5 block"
+                        className="text-sm font-semibold text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors mt-0.5 block"
                       >
                         {personalInfo.social.phone}
                       </a>
@@ -247,8 +252,8 @@ export default function Contact({ onShowToast }) {
               </div>
 
               {/* LinkedIn & GitHub */}
-              <div className="pt-4 border-t border-[#252525]">
-                <p className="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider mb-3">
+              <div className="pt-4 border-t border-[var(--border-color)]">
+                <p className="text-xs font-mono text-[var(--text-secondary)] uppercase tracking-wider mb-3">
                   Social Profiles
                 </p>
                 <div className="grid grid-cols-2 gap-3">
@@ -256,26 +261,26 @@ export default function Contact({ onShowToast }) {
                     href={personalInfo.social.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3.5 rounded-xl bg-[#0A0A0A] border border-[#252525] hover:border-[#007BA7] text-white transition-all group"
+                    className="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] transition-all group"
                   >
                     <div className="flex items-center gap-2.5">
-                      <Linkedin className="w-4 h-4 text-[#007BA7]" />
+                      <Linkedin className="w-4 h-4 text-[var(--accent-primary)]" />
                       <span className="text-xs font-semibold">LinkedIn</span>
                     </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-[#A1A1AA] group-hover:text-[#FF2D75] transition-colors" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[var(--text-secondary)] group-hover:text-[var(--accent-secondary)] transition-colors" />
                   </a>
 
                   <a
                     href={personalInfo.social.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3.5 rounded-xl bg-[#0A0A0A] border border-[#252525] hover:border-[#FF2D75] text-white transition-all group"
+                    className="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-[var(--text-primary)] transition-all group"
                   >
                     <div className="flex items-center gap-2.5">
-                      <Github className="w-4 h-4 text-white" />
+                      <Github className="w-4 h-4 text-[var(--text-primary)]" />
                       <span className="text-xs font-semibold">GitHub</span>
                     </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-[#A1A1AA] group-hover:text-[#007BA7] transition-colors" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[var(--text-secondary)] group-hover:text-[var(--accent-primary)] transition-colors" />
                   </a>
                 </div>
               </div>
@@ -289,12 +294,12 @@ export default function Contact({ onShowToast }) {
               noValidate
               className="premium-card rounded-2xl p-6 sm:p-8 space-y-5"
             >
-              <div className="flex items-center justify-between gap-2 pb-3 border-b border-[#252525]">
+              <div className="flex items-center justify-between gap-2 pb-3 border-b border-[var(--border-color)]">
                 <div className="flex items-center gap-2.5">
-                  <MessageSquare className="w-5 h-5 text-[#007BA7]" />
-                  <h3 className="text-lg font-bold text-white">Send a Message</h3>
+                  <MessageSquare className="w-5 h-5 text-[var(--accent-primary)]" />
+                  <h3 className="text-lg font-bold text-[var(--text-primary)]">Send a Message</h3>
                 </div>
-                <span className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-[#0A0A0A] border border-[#252525] text-[#A1A1AA]">
+                <span className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)]">
                   {hasEndpoint ? 'Live Service Active' : hasEmail ? 'Mail Client Mode' : 'Configurable Form'}
                 </span>
               </div>
@@ -302,8 +307,8 @@ export default function Contact({ onShowToast }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {/* Name */}
                 <div>
-                  <label htmlFor="contact-name" className="block text-xs font-medium text-white/90 mb-1.5">
-                    Name <span className="text-[#FF2D75]">*</span>
+                  <label htmlFor="contact-name" className="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
+                    Name <span className="text-[var(--accent-secondary)]">*</span>
                   </label>
                   <input
                     id="contact-name"
@@ -312,17 +317,19 @@ export default function Contact({ onShowToast }) {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your full name"
-                    className={`w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border ${
-                      errors.name ? 'border-[#FF2D75]' : 'border-[#252525] hover:border-[#FF2D75]/50 focus:border-[#007BA7]'
-                    } text-sm text-white placeholder-[#A1A1AA]/60 focus:outline-none focus:ring-1 focus:ring-[#007BA7] transition-all`}
+                    className={`w-full px-4 py-3 rounded-xl bg-[var(--bg-primary)] border ${
+                      errors.name
+                        ? 'border-[var(--accent-secondary)]'
+                        : 'border-[var(--border-color)] hover:border-[var(--accent-secondary)] focus:border-[var(--accent-primary)]'
+                    } text-sm text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:ring-1 focus:ring-[var(--accent-primary)] transition-all`}
                   />
-                  {errors.name && <p className="mt-1 text-xs text-[#FF2D75]">{errors.name}</p>}
+                  {errors.name && <p className="mt-1 text-xs text-[var(--accent-secondary)]">{errors.name}</p>}
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label htmlFor="contact-email" className="block text-xs font-medium text-white/90 mb-1.5">
-                    Email <span className="text-[#FF2D75]">*</span>
+                  <label htmlFor="contact-email" className="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
+                    Email <span className="text-[var(--accent-secondary)]">*</span>
                   </label>
                   <input
                     id="contact-email"
@@ -331,18 +338,20 @@ export default function Contact({ onShowToast }) {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="you@company.com"
-                    className={`w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border ${
-                      errors.email ? 'border-[#FF2D75]' : 'border-[#252525] hover:border-[#FF2D75]/50 focus:border-[#007BA7]'
-                    } text-sm text-white placeholder-[#A1A1AA]/60 focus:outline-none focus:ring-1 focus:ring-[#007BA7] transition-all`}
+                    className={`w-full px-4 py-3 rounded-xl bg-[var(--bg-primary)] border ${
+                      errors.email
+                        ? 'border-[var(--accent-secondary)]'
+                        : 'border-[var(--border-color)] hover:border-[var(--accent-secondary)] focus:border-[var(--accent-primary)]'
+                    } text-sm text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:ring-1 focus:ring-[var(--accent-primary)] transition-all`}
                   />
-                  {errors.email && <p className="mt-1 text-xs text-[#FF2D75]">{errors.email}</p>}
+                  {errors.email && <p className="mt-1 text-xs text-[var(--accent-secondary)]">{errors.email}</p>}
                 </div>
               </div>
 
               {/* Subject */}
               <div>
-                <label htmlFor="contact-subject" className="block text-xs font-medium text-white/90 mb-1.5">
-                  Subject <span className="text-[#FF2D75]">*</span>
+                <label htmlFor="contact-subject" className="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
+                  Subject <span className="text-[var(--accent-secondary)]">*</span>
                 </label>
                 <input
                   id="contact-subject"
@@ -351,17 +360,19 @@ export default function Contact({ onShowToast }) {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Full Stack Developer Internship Inquiry"
-                  className={`w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border ${
-                    errors.subject ? 'border-[#FF2D75]' : 'border-[#252525] hover:border-[#FF2D75]/50 focus:border-[#007BA7]'
-                  } text-sm text-white placeholder-[#A1A1AA]/60 focus:outline-none focus:ring-1 focus:ring-[#007BA7] transition-all`}
+                  className={`w-full px-4 py-3 rounded-xl bg-[var(--bg-primary)] border ${
+                    errors.subject
+                      ? 'border-[var(--accent-secondary)]'
+                      : 'border-[var(--border-color)] hover:border-[var(--accent-secondary)] focus:border-[var(--accent-primary)]'
+                  } text-sm text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:ring-1 focus:ring-[var(--accent-primary)] transition-all`}
                 />
-                {errors.subject && <p className="mt-1 text-xs text-[#FF2D75]">{errors.subject}</p>}
+                {errors.subject && <p className="mt-1 text-xs text-[var(--accent-secondary)]">{errors.subject}</p>}
               </div>
 
               {/* Message */}
               <div>
-                <label htmlFor="contact-message" className="block text-xs font-medium text-white/90 mb-1.5">
-                  Message <span className="text-[#FF2D75]">*</span>
+                <label htmlFor="contact-message" className="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
+                  Message <span className="text-[var(--accent-secondary)]">*</span>
                 </label>
                 <textarea
                   id="contact-message"
@@ -370,25 +381,27 @@ export default function Contact({ onShowToast }) {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Share internship details, role requirements, or project ideas..."
-                  className={`w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border ${
-                    errors.message ? 'border-[#FF2D75]' : 'border-[#252525] hover:border-[#FF2D75]/50 focus:border-[#007BA7]'
-                  } text-sm text-white placeholder-[#A1A1AA]/60 focus:outline-none focus:ring-1 focus:ring-[#007BA7] transition-all resize-y`}
+                  className={`w-full px-4 py-3 rounded-xl bg-[var(--bg-primary)] border ${
+                    errors.message
+                      ? 'border-[var(--accent-secondary)]'
+                      : 'border-[var(--border-color)] hover:border-[var(--accent-secondary)] focus:border-[var(--accent-primary)]'
+                  } text-sm text-[var(--text-primary)] placeholder-[var(--text-secondary)] focus:outline-none focus:ring-1 focus:ring-[var(--accent-primary)] transition-all resize-y`}
                 />
-                {errors.message && <p className="mt-1 text-xs text-[#FF2D75]">{errors.message}</p>}
+                {errors.message && <p className="mt-1 text-xs text-[var(--accent-secondary)]">{errors.message}</p>}
               </div>
 
               {/* Honest Submission Feedback */}
               {submitState === 'sent' && (
-                <div className="p-4 rounded-xl bg-[#007BA7]/10 border border-[#007BA7]/40 text-xs sm:text-sm text-white flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-[#007BA7] shrink-0 mt-0.5" />
+                <div className="p-4 rounded-xl bg-[var(--accent-primary-soft)] border border-[var(--accent-primary-border)] text-xs sm:text-sm text-[var(--text-primary)] flex items-start gap-2.5">
+                  <Check className="w-4 h-4 text-[var(--accent-primary)] shrink-0 mt-0.5" />
                   <span>Your message was delivered via the configured form endpoint.</span>
                 </div>
               )}
 
               {submitState === 'not_configured' && (
-                <div className="p-4 rounded-xl bg-[#0A0A0A] border border-[#252525] text-xs sm:text-sm text-[#A1A1AA] space-y-2.5">
+                <div className="p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] text-xs sm:text-sm text-[var(--text-secondary)] space-y-2.5">
                   <div className="flex items-start gap-2">
-                    <AlertCircle className="w-4 h-4 text-[#FF2D75] shrink-0 mt-0.5" />
+                    <AlertCircle className="w-4 h-4 text-[var(--accent-secondary)] shrink-0 mt-0.5" />
                     <span>
                       {hasEmail
                         ? 'Your mail client was opened because no backend form service endpoint is configured.'
@@ -399,18 +412,18 @@ export default function Contact({ onShowToast }) {
                     <button
                       type="button"
                       onClick={handleCopyDraft}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#141414] border border-[#252525] hover:border-[#007BA7] text-xs font-medium text-white transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-xs font-medium text-[var(--text-primary)] transition-colors"
                     >
-                      <Copy className="w-3.5 h-3.5 text-[#007BA7]" />
+                      <Copy className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
                       <span>Copy Draft</span>
                     </button>
                     <a
                       href={personalInfo.social.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#141414] border border-[#252525] hover:border-[#FF2D75] text-xs font-medium text-white transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-xs font-medium text-[var(--text-primary)] transition-colors"
                     >
-                      <Linkedin className="w-3.5 h-3.5 text-[#007BA7]" />
+                      <Linkedin className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
                       <span>Message on LinkedIn</span>
                     </a>
                   </div>
@@ -422,15 +435,17 @@ export default function Contact({ onShowToast }) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#007BA7] hover:bg-[#0090C2] border border-[#007BA7] hover:border-[#FF2D75]/70 text-white font-semibold text-sm shadow-lg shadow-[#007BA7]/25 hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-60 disabled:cursor-not-allowed w-full sm:w-auto"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] border border-[var(--accent-primary)] hover:border-[var(--accent-secondary)] text-white font-semibold text-sm shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-60 disabled:cursor-not-allowed w-full sm:w-auto"
                 >
                   <Send className="w-4 h-4" />
                   <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                 </button>
 
-                <span className="text-xs text-[#A1A1AA]">
+                <span className="text-xs text-[var(--text-secondary)]">
                   {hasEndpoint
                     ? 'Connected to configured form endpoint.'
+                    : hasEmail
+                    ? 'Opens your email client or copy draft.'
                     : 'Set VITE_FORMSPREE_ENDPOINT for direct delivery.'}
                 </span>
               </div>

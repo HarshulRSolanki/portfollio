@@ -10,14 +10,14 @@ export default function Education() {
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141414] border border-[#252525] text-[#007BA7] text-xs font-mono mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-[#FF2D75]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--accent-primary)] text-xs font-mono mb-3 transition-colors duration-300">
+            <Sparkles className="w-3.5 h-3.5 text-[var(--accent-secondary)]" />
             <span>ACADEMIC JOURNEY</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Education <span className="text-[#007BA7]">Timeline</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">
+            Education <span className="text-[var(--accent-primary)]">Timeline</span>
           </h2>
-          <p className="mt-3 text-base text-[#A1A1AA]">
+          <p className="mt-3 text-base text-[var(--text-secondary)]">
             Academic foundations in computer applications, algorithms, and software systems.
           </p>
         </div>
@@ -25,7 +25,7 @@ export default function Education() {
         {/* Vertical Timeline */}
         <div className="relative">
           {/* Animated Vertical Line */}
-          <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#007BA7] via-[#FF2D75]/60 to-transparent" />
+          <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-0.5 timeline-line" />
 
           <div className="space-y-10">
             {educationHistory.map((edu, index) => {
@@ -41,15 +41,15 @@ export default function Education() {
                 >
                   {/* Timeline Node Icon */}
                   <div
-                    className={`absolute left-2 sm:left-4 top-6 w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all ${
+                    className={`absolute left-2 sm:left-4 top-6 w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all bg-[var(--bg-primary)] ${
                       isCurrent
-                        ? 'bg-[#0A0A0A] border-[#FF2D75] text-[#FF2D75] shadow-[0_0_20px_rgba(255,45,117,0.35)]'
-                        : 'bg-[#0A0A0A] border-[#007BA7] text-[#007BA7]'
+                        ? 'border-[var(--accent-secondary)] text-[var(--accent-secondary)] shadow-md'
+                        : 'border-[var(--accent-primary)] text-[var(--accent-primary)]'
                     }`}
                   >
                     <GraduationCap className="w-4 h-4" />
                     {isCurrent && (
-                      <span className="absolute -inset-1 rounded-full border border-[#FF2D75]/50 animate-ping opacity-40" />
+                      <span className="absolute -inset-1 rounded-full border border-[var(--accent-secondary)] animate-ping opacity-35" />
                     )}
                   </div>
 
@@ -62,43 +62,43 @@ export default function Education() {
                             isCurrent ? 'pink-badge' : 'ocean-badge'
                           }`}
                         >
-                          {isCurrent && <span className="w-1.5 h-1.5 rounded-full bg-[#FF2D75] animate-pulse" />}
+                          {isCurrent && <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-secondary)] animate-pulse" />}
                           {edu.status}
                         </span>
-                        <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#007BA7] transition-colors">
+                        <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors">
                           {edu.degree}
                         </h3>
-                        <p className="text-sm sm:text-base font-medium text-[#007BA7] mt-1">
+                        <p className="text-sm sm:text-base font-medium text-[var(--accent-primary)] mt-1">
                           {edu.institution}
                         </p>
                       </div>
 
-                      <div className="flex flex-col sm:items-end gap-1.5 text-xs font-mono text-[#A1A1AA]">
-                        <span className="inline-flex items-center gap-1.5 bg-[#0A0A0A] px-3 py-1.5 rounded-lg border border-[#252525]">
-                          <Calendar className="w-3.5 h-3.5 text-[#007BA7]" />
+                      <div className="flex flex-col sm:items-end gap-1.5 text-xs font-mono text-[var(--text-secondary)]">
+                        <span className="inline-flex items-center gap-1.5 bg-[var(--bg-primary)] px-3 py-1.5 rounded-lg border border-[var(--border-color)]">
+                          <Calendar className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
                           {edu.duration}
                         </span>
-                        <span className="inline-flex items-center gap-1.5 px-1 text-[#A1A1AA]">
-                          <MapPin className="w-3.5 h-3.5 text-[#FF2D75]" />
+                        <span className="inline-flex items-center gap-1.5 px-1 text-[var(--text-secondary)]">
+                          <MapPin className="w-3.5 h-3.5 text-[var(--accent-secondary)]" />
                           {edu.location}
                         </span>
                       </div>
                     </div>
 
                     {/* Focus Areas */}
-                    <div className="p-3.5 rounded-xl bg-[#0A0A0A] border border-[#252525] mb-4 flex items-start gap-2.5 text-xs sm:text-sm">
-                      <BookOpen className="w-4 h-4 text-[#007BA7] shrink-0 mt-0.5" />
+                    <div className="p-3.5 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] mb-4 flex items-start gap-2.5 text-xs sm:text-sm transition-colors duration-300">
+                      <BookOpen className="w-4 h-4 text-[var(--accent-primary)] shrink-0 mt-0.5" />
                       <div>
-                        <span className="font-semibold text-white mr-1.5">Key Focus:</span>
-                        <span className="text-[#A1A1AA]">{edu.focus}</span>
+                        <span className="font-semibold text-[var(--text-primary)] mr-1.5">Key Focus:</span>
+                        <span className="text-[var(--text-secondary)]">{edu.focus}</span>
                       </div>
                     </div>
 
                     {/* Highlights */}
                     <ul className="space-y-2">
                       {edu.highlights.map((item, hIndex) => (
-                        <li key={hIndex} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#A1A1AA]">
-                          <CheckCircle2 className="w-4 h-4 text-[#007BA7] shrink-0 mt-0.5" />
+                        <li key={hIndex} className="flex items-start gap-2.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+                          <CheckCircle2 className="w-4 h-4 text-[var(--accent-primary)] shrink-0 mt-0.5" />
                           <span>{item}</span>
                         </li>
                       ))}

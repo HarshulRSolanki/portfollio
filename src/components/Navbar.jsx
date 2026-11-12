@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileDown } from 'lucide-react';
+import { Menu, X, FileDown, Sun, Moon } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { personalInfo, navLinks } from '../data/portfolioData';
 
-export default function Navbar({ onOpenResume }) {
+export default function Navbar({ onOpenResume, theme = 'dark', onToggleTheme }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+
+  const isLight = theme === 'light';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,33 +47,31 @@ export default function Navbar({ onOpenResume }) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? 'glass-nav py-3.5 shadow-xl shadow-black/60'
-          : 'bg-[#0A0A0A]/40 backdrop-blur-sm py-5 border-b border-transparent'
+        scrolled ? 'glass-nav py-3.5 shadow-xl' : 'nav-top py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3">
           {/* Personal Logo / Developer Initials */}
           <a
             href="#home"
             onClick={(e) => scrollToSection(e, '#home')}
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-3 group min-w-0"
           >
-            <div className="px-2.5 h-10 rounded-xl bg-[#141414] border border-[#252525] group-hover:border-[#007BA7] flex items-center justify-center transition-colors shadow-sm">
-              <span className="font-mono font-bold text-sm tracking-tight text-white">
-                <span className="text-[#007BA7]">&lt;</span>
+            <div className="px-2.5 h-10 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] group-hover:border-[var(--accent-primary)] flex items-center justify-center transition-colors shadow-sm shrink-0">
+              <span className="font-mono font-bold text-sm tracking-tight text-[var(--text-primary)]">
+                <span className="text-[var(--accent-primary)]">&lt;</span>
                 {personalInfo.initials}
-                <span className="text-[#FF2D75]">/&gt;</span>
+                <span className="text-[var(--accent-secondary)]">/&gt;</span>
               </span>
             </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-sm sm:text-base tracking-tight text-white group-hover:text-[#007BA7] transition-colors">
+            <div className="flex flex-col min-w-0">
+              <span className="font-bold text-sm sm:text-base tracking-tight text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors truncate">
                 {personalInfo.displayName}
               </span>
-              <span className="text-[11px] font-mono text-[#A1A1AA] flex items-center gap-1.5">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#FF2D75] animate-pulse" />
-                {personalInfo.currentEducation} • GTU
+              <span className="text-[11px] font-mono text-[var(--text-secondary)] flex items-center gap-1.5 truncate">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--accent-secondary)] animate-pulse shrink-0" />
+                <span className="truncate">{personalInfo.currentEducation} • GTU</span>
               </span>
             </div>
           </a>
@@ -79,7 +79,7 @@ export default function Navbar({ onOpenResume }) {
           {/* Desktop Navigation */}
           <nav
             aria-label="Primary Navigation"
-            className="hidden lg:flex items-center gap-1 bg-[#141414]/90 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-[#252525]"
+            className="hidden lg:flex items-center gap-1 bg-[var(--bg-card)]/90 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-[var(--border-color)] transition-colors duration-300"
           >
             {navLinks.map((link) => {
               const sectionId = link.href.replace('#', '');
@@ -91,8 +91,8 @@ export default function Navbar({ onOpenResume }) {
                   onClick={(e) => scrollToSection(e, link.href)}
                   className={`relative px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
                     isActive
-                      ? 'text-white bg-[#007BA7] shadow-md shadow-[#007BA7]/30 font-semibold'
-                      : 'text-[#A1A1AA] hover:text-white hover:bg-[#252525]/50'
+                      ? 'text-white bg-[var(--accent-primary)] shadow-md font-semibold'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]'
                   }`}
                 >
                   {link.name}
@@ -101,19 +101,43 @@ export default function Navbar({ onOpenResume }) {
             })}
           </nav>
 
-          {/* Actions & Hamburger */}
-          <div className="flex items-center gap-2.5">
+          {/* Actions, Theme Toggle & Hamburger */}
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            {/* Clear Light / Dark Theme Switcher */}
             <button
+              type="button"
+              onClick={onToggleTheme}
+              aria-label={isLight ? 'Switch to dark theme' : 'Switch to light theme'}
+              title={isLight ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
+              data-testid="theme-toggle"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+            >
+              {isLight ? (
+                <>
+                  <Moon className="w-4 h-4 text-[var(--accent-primary)] transition-transform duration-300" />
+                  <span className="hidden sm:inline">Dark</span>
+                </>
+              ) : (
+                <>
+                  <Sun className="w-4 h-4 text-[var(--accent-secondary)] transition-transform duration-300" />
+                  <span className="hidden sm:inline">Light</span>
+                </>
+              )}
+            </button>
+
+            <button
+              type="button"
               onClick={onOpenResume}
-              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-xl bg-[#007BA7] hover:bg-[#0090C2] text-white border border-[#007BA7] hover:border-[#FF2D75]/60 shadow-lg shadow-[#007BA7]/25 hover:shadow-[#007BA7]/40 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 group"
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white border border-[var(--accent-primary)] hover:border-[var(--accent-secondary)] shadow-lg transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 group"
             >
               <FileDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
               <span>Resume</span>
             </button>
 
             <button
+              type="button"
               onClick={onOpenResume}
-              className="sm:hidden p-2 text-white bg-[#007BA7] rounded-lg border border-[#007BA7]"
+              className="sm:hidden p-2 text-white bg-[var(--accent-primary)] rounded-lg border border-[var(--accent-primary)]"
               title="Download Resume"
               aria-label="Download Resume"
             >
@@ -121,8 +145,9 @@ export default function Navbar({ onOpenResume }) {
             </button>
 
             <button
+              type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 rounded-lg bg-[#141414] border border-[#252525] text-[#A1A1AA] hover:text-white hover:border-[#007BA7] transition-colors"
+              className="lg:hidden p-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent-primary)] transition-colors"
               aria-label="Toggle Navigation Menu"
               aria-expanded={isOpen}
             >
@@ -140,12 +165,22 @@ export default function Navbar({ onOpenResume }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
-            className="lg:hidden overflow-hidden glass-nav border-t border-[#252525] mt-3"
+            className="lg:hidden overflow-hidden glass-nav border-t border-[var(--border-color)] mt-3"
           >
             <div className="px-4 pt-3 pb-6 space-y-2">
-              <div className="px-3 py-2 mb-2 rounded-lg bg-[#141414] border border-[#252525] flex items-center gap-2 text-xs text-[#A1A1AA]">
-                <span className="w-2 h-2 rounded-full bg-[#FF2D75] animate-ping" />
-                <span>{personalInfo.availability}</span>
+              <div className="px-3 py-2 mb-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] flex items-center justify-between gap-2 text-xs text-[var(--text-secondary)]">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="w-2 h-2 rounded-full bg-[var(--accent-secondary)] animate-ping shrink-0" />
+                  <span className="truncate">{personalInfo.availability}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={onToggleTheme}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[var(--bg-elevated)] border border-[var(--border-color)] text-[var(--text-primary)] font-mono text-[11px] shrink-0"
+                >
+                  {isLight ? <Moon className="w-3 h-3" /> : <Sun className="w-3 h-3" />}
+                  <span>{isLight ? 'Dark' : 'Light'}</span>
+                </button>
               </div>
               {navLinks.map((link) => {
                 const sectionId = link.href.replace('#', '');
@@ -157,8 +192,8 @@ export default function Navbar({ onOpenResume }) {
                     onClick={(e) => scrollToSection(e, link.href)}
                     className={`block px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                       isActive
-                        ? 'bg-[#007BA7]/20 text-white border border-[#007BA7]'
-                        : 'text-[#A1A1AA] hover:text-white hover:bg-[#141414]'
+                        ? 'bg-[var(--accent-primary-soft)] text-[var(--text-primary)] border border-[var(--accent-primary)] font-semibold'
+                        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
                     }`}
                   >
                     {link.name}
@@ -167,11 +202,12 @@ export default function Navbar({ onOpenResume }) {
               })}
               <div className="pt-2">
                 <button
+                  type="button"
                   onClick={() => {
                     setIsOpen(false);
                     onOpenResume();
                   }}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#007BA7] hover:bg-[#0090C2] text-white text-sm font-semibold shadow-lg shadow-[#007BA7]/25 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white text-sm font-semibold shadow-lg transition-colors"
                 >
                   <FileDown className="w-4 h-4" />
                   <span>Download Resume</span>
