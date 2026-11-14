@@ -84,7 +84,7 @@ export default function ResumeModal({ isOpen, onClose, onShowToast }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 md:p-8 backdrop-blur-sm"
       style={{ backgroundColor: 'var(--modal-backdrop)' }}
       onClick={onClose}
       role="dialog"
@@ -92,13 +92,13 @@ export default function ResumeModal({ isOpen, onClose, onShowToast }) {
       aria-labelledby="resume-modal-title"
     >
       <div
-        className="relative w-full max-w-3xl max-h-[90vh] flex flex-col bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl shadow-2xl overflow-hidden transition-colors duration-300"
+        className="relative w-full max-w-3xl max-h-[92vh] sm:max-h-[90vh] flex flex-col bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl shadow-2xl overflow-hidden transition-colors duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <header className="flex items-center justify-between gap-4 px-5 sm:px-7 py-4 bg-[var(--bg-primary)] border-b border-[var(--border-color)] shrink-0 transition-colors duration-300">
+        <header className="flex items-center justify-between gap-4 px-4 sm:px-7 py-3.5 sm:py-4 bg-[var(--bg-primary)] border-b border-[var(--border-color)] shrink-0 transition-colors duration-300">
           <div className="min-w-0">
-            <h3 id="resume-modal-title" className="text-base sm:text-lg font-bold text-[var(--text-primary)] truncate">
+            <h3 id="resume-modal-title" className="text-sm sm:text-lg font-bold text-[var(--text-primary)] truncate">
               Resume — {personalInfo.name}
             </h3>
             <p className="text-xs font-mono text-[var(--accent-primary)] truncate">
@@ -119,7 +119,7 @@ export default function ResumeModal({ isOpen, onClose, onShowToast }) {
         <div
           role="tablist"
           aria-label="Resume view options"
-          className="px-5 sm:px-7 py-3 bg-[var(--bg-card)] border-b border-[var(--border-color)] flex flex-wrap items-center gap-2 shrink-0 transition-colors duration-300"
+          className="px-4 sm:px-7 py-2.5 sm:py-3 bg-[var(--bg-card)] border-b border-[var(--border-color)] flex flex-wrap items-center gap-2 shrink-0 transition-colors duration-300"
         >
           {hasResumeUrl && (
             <button
@@ -127,7 +127,7 @@ export default function ResumeModal({ isOpen, onClose, onShowToast }) {
               role="tab"
               aria-selected={activeTab === 'pdf'}
               onClick={() => setActiveTab('pdf')}
-              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === 'pdf'
                   ? 'bg-[var(--accent-primary)] text-white shadow-sm font-semibold'
                   : 'bg-[var(--bg-primary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-color)] hover:border-[var(--accent-primary)]'
@@ -142,7 +142,7 @@ export default function ResumeModal({ isOpen, onClose, onShowToast }) {
             role="tab"
             aria-selected={activeTab === 'summary'}
             onClick={() => setActiveTab('summary')}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === 'summary'
                 ? 'bg-[var(--accent-primary)] text-white shadow-sm font-semibold'
                 : 'bg-[var(--bg-primary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-color)] hover:border-[var(--accent-primary)]'
@@ -154,10 +154,10 @@ export default function ResumeModal({ isOpen, onClose, onShowToast }) {
         </div>
 
         {/* Modal Body */}
-        <div className="flex-1 overflow-y-auto px-5 sm:px-7 py-5 sm:py-6 space-y-6">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-7 py-4 sm:py-6 space-y-5 sm:space-y-6">
           {activeTab === 'pdf' && hasResumeUrl ? (
             <div className="space-y-3">
-              <div className="w-full h-[54vh] min-h-[340px] rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-primary)]">
+              <div className="w-full h-[48vh] sm:h-[54vh] min-h-[260px] sm:min-h-[340px] rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-primary)]">
                 <iframe
                   src={resumeUrl}
                   title={`${personalInfo.displayName} Resume PDF`}
@@ -283,13 +283,13 @@ export default function ResumeModal({ isOpen, onClose, onShowToast }) {
         </div>
 
         {/* Footer Actions */}
-        <footer className="px-5 sm:px-7 py-4 bg-[var(--bg-primary)] border-t border-[var(--border-color)] flex flex-wrap items-center justify-between gap-3 shrink-0 transition-colors duration-300">
-          <div className="flex flex-wrap items-center gap-2.5">
+        <footer className="px-4 sm:px-7 py-3.5 sm:py-4 bg-[var(--bg-primary)] border-t border-[var(--border-color)] flex flex-wrap items-center justify-between gap-3 shrink-0 transition-colors duration-300">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
             {activeTab === 'summary' && (
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-xs sm:text-sm font-semibold text-[var(--text-primary)] transition-colors"
+                className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-xs sm:text-sm font-semibold text-[var(--text-primary)] transition-colors"
               >
                 <Printer className="w-4 h-4" />
                 <span>Print Summary</span>
@@ -301,7 +301,7 @@ export default function ResumeModal({ isOpen, onClose, onShowToast }) {
                 href={resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-xs sm:text-sm font-semibold text-[var(--text-primary)] transition-colors"
+                className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-xs sm:text-sm font-semibold text-[var(--text-primary)] transition-colors"
               >
                 <Eye className="w-4 h-4 text-[var(--accent-secondary)]" />
                 <span>View PDF</span>
@@ -313,7 +313,7 @@ export default function ResumeModal({ isOpen, onClose, onShowToast }) {
             type="button"
             disabled={isDownloading}
             onClick={handleDownload}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] border border-[var(--accent-primary)] hover:border-[var(--accent-secondary)] text-white text-xs sm:text-sm font-semibold shadow-lg transition-all disabled:opacity-60"
+            className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] border border-[var(--accent-primary)] hover:border-[var(--accent-secondary)] text-white text-xs sm:text-sm font-semibold shadow-lg transition-all disabled:opacity-60"
           >
             {hasResumeUrl ? <CheckCircle2 className="w-4 h-4" /> : <FileDown className="w-4 h-4" />}
             <span>

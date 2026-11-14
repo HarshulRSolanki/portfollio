@@ -26,7 +26,7 @@ export default function ProjectVisual({ type, screenshotUrl, title }) {
 
   if (type === 'umcao') {
     return (
-      <div className="relative min-h-[12.5rem] sm:min-h-[13rem] w-full overflow-hidden rounded-t-2xl bg-[var(--bg-primary)] border-b border-[var(--border-color)] p-4 flex flex-col justify-between gap-2 select-none transition-colors duration-300">
+      <div className="relative min-h-[12rem] sm:min-h-[13rem] w-full overflow-hidden rounded-t-2xl bg-[var(--bg-primary)] border-b border-[var(--border-color)] p-3 sm:p-4 flex flex-col justify-between gap-2 select-none transition-colors duration-300">
         {/* Top Window Bar */}
         <div className="flex items-center justify-between gap-2 border-b border-[var(--border-color)] pb-2">
           <div className="flex items-center gap-1.5 min-w-0">
@@ -88,7 +88,7 @@ export default function ProjectVisual({ type, screenshotUrl, title }) {
 
   if (type === 'bookstore') {
     return (
-      <div className="relative h-48 sm:h-52 w-full overflow-hidden rounded-t-2xl bg-[var(--bg-primary)] border-b border-[var(--border-color)] p-4 flex flex-col justify-between select-none transition-colors duration-300">
+      <div className="relative h-44 sm:h-52 w-full overflow-hidden rounded-t-2xl bg-[var(--bg-primary)] border-b border-[var(--border-color)] p-3 sm:p-4 flex flex-col justify-between select-none transition-colors duration-300">
         <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-2">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-[var(--accent-secondary)] opacity-80" />
@@ -143,7 +143,7 @@ export default function ProjectVisual({ type, screenshotUrl, title }) {
 
   // Fallback Project Mockup
   return (
-    <div className="relative h-48 sm:h-52 w-full overflow-hidden rounded-t-2xl bg-[var(--bg-primary)] border-b border-[var(--border-color)] p-4 flex flex-col justify-between select-none transition-colors duration-300">
+    <div className="relative h-44 sm:h-52 w-full overflow-hidden rounded-t-2xl bg-[var(--bg-primary)] border-b border-[var(--border-color)] p-3 sm:p-4 flex flex-col justify-between select-none transition-colors duration-300">
       <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-2">
         <div className="flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-[var(--accent-secondary)] opacity-80" />

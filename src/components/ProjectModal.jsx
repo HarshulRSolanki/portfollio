@@ -110,7 +110,7 @@ export default function ProjectModal({ project, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 md:p-8 backdrop-blur-sm"
       style={{ backgroundColor: 'var(--modal-backdrop)' }}
       onClick={onClose}
       role="dialog"
@@ -118,11 +118,11 @@ export default function ProjectModal({ project, onClose }) {
       aria-labelledby="project-modal-title"
     >
       <div
-        className="relative w-full max-w-3xl max-h-[90vh] flex flex-col bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl shadow-2xl overflow-hidden transition-colors duration-300"
+        className="relative w-full max-w-3xl max-h-[92vh] sm:max-h-[90vh] flex flex-col bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl shadow-2xl overflow-hidden transition-colors duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Dedicated Modal Header (prevents close button from overlapping content) */}
-        <header className="px-5 sm:px-7 py-4 sm:py-5 bg-[var(--bg-primary)] border-b border-[var(--border-color)] flex items-start justify-between gap-4 shrink-0 transition-colors duration-300">
+        <header className="px-4 sm:px-7 py-3.5 sm:py-5 bg-[var(--bg-primary)] border-b border-[var(--border-color)] flex items-start justify-between gap-4 shrink-0 transition-colors duration-300">
           <div className="min-w-0 space-y-1.5">
             <span className="inline-block px-2.5 py-0.5 rounded-full ocean-badge text-[11px] font-mono">
               {project.category}
@@ -149,7 +149,7 @@ export default function ProjectModal({ project, onClose }) {
         <div
           role="tablist"
           aria-label="Project details sections"
-          className="px-5 sm:px-7 py-3 bg-[var(--bg-card)] border-b border-[var(--border-color)] flex flex-wrap items-center gap-2 shrink-0 transition-colors duration-300"
+          className="px-4 sm:px-7 py-2.5 sm:py-3 bg-[var(--bg-card)] border-b border-[var(--border-color)] flex flex-wrap items-center gap-2 shrink-0 transition-colors duration-300"
         >
           {DETAIL_TABS.map((tab) => {
             const isActive = activeTab === tab.id;
@@ -173,7 +173,7 @@ export default function ProjectModal({ project, onClose }) {
         </div>
 
         {/* Scrollable Details Body with Uniform Margins & Section Spacing */}
-        <div className="flex-1 overflow-y-auto px-5 sm:px-7 py-6 space-y-6">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-7 py-5 sm:py-6 space-y-5 sm:space-y-6">
           {showOverview && (
             <>
               {/* Framed Project Visual Preview */}
@@ -425,20 +425,20 @@ export default function ProjectModal({ project, onClose }) {
         </div>
 
         {/* Dedicated Footer Action Bar with Symmetric Margins */}
-        <footer className="px-5 sm:px-7 py-4 bg-[var(--bg-primary)] border-t border-[var(--border-color)] flex flex-wrap items-center justify-between gap-3 shrink-0 transition-colors duration-300">
-          <div className="flex flex-wrap items-center gap-3">
+        <footer className="px-4 sm:px-7 py-3.5 sm:py-4 bg-[var(--bg-primary)] border-t border-[var(--border-color)] flex flex-wrap items-center justify-between gap-3 shrink-0 transition-colors duration-300">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             {ghInfo.isValid && targetGithubUrl ? (
               <a
                 href={targetGithubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] text-xs sm:text-sm font-semibold transition-all"
+                className="inline-flex items-center gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] text-xs sm:text-sm font-semibold transition-all"
               >
                 <Github className="w-4 h-4 shrink-0" />
                 <span>{ghInfo.isRepo ? 'GitHub Repository' : 'GitHub Profile'}</span>
               </a>
             ) : (
-              <span className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-secondary)] text-xs sm:text-sm font-semibold opacity-75">
+              <span className="inline-flex items-center gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-secondary)] text-xs sm:text-sm font-semibold opacity-75">
                 <Github className="w-4 h-4 shrink-0" />
                 <span>Repository Unavailable</span>
               </span>
@@ -449,7 +449,7 @@ export default function ProjectModal({ project, onClose }) {
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white text-xs sm:text-sm font-semibold shadow-lg transition-all"
+                className="inline-flex items-center gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white text-xs sm:text-sm font-semibold shadow-lg transition-all"
               >
                 <ExternalLink className="w-4 h-4 shrink-0" />
                 <span>Live Demo</span>
@@ -460,7 +460,7 @@ export default function ProjectModal({ project, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs sm:text-sm font-semibold transition-colors"
+            className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs sm:text-sm font-semibold transition-colors"
           >
             <span>Close</span>
           </button>

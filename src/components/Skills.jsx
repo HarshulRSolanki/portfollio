@@ -64,32 +64,32 @@ export default function Skills() {
     .filter((cat) => cat.skills.length > 0);
 
   return (
-    <section id="skills" className="py-20 lg:py-28 relative">
+    <section id="skills" className="py-14 xs:py-16 sm:py-20 lg:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--accent-primary)] text-xs font-mono mb-3 transition-colors duration-300">
             <Sparkles className="w-3.5 h-3.5 text-[var(--accent-secondary)]" />
             <span>TECHNICAL STACK</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">
             Technical <span className="text-[var(--accent-primary)]">Skills</span>
           </h2>
-          <p className="mt-3 text-base text-[var(--text-secondary)]">
+          <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)]">
             Technologies, frameworks, and tools I use to architect full-stack applications.
           </p>
         </div>
 
         {/* Filter Controls & Search Bar */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-4 mb-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-4 mb-8 sm:mb-10">
           <div className="flex flex-wrap items-center justify-center gap-2 w-full lg:w-auto">
             {filterCategories.map((category) => (
               <button
                 type="button"
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
+                className={`px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
                   selectedCategory === category
                     ? 'bg-[var(--accent-primary)] text-white shadow-md font-semibold'
                     : 'bg-[var(--bg-card)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-color)] hover:border-[var(--accent-primary)]'
@@ -113,7 +113,7 @@ export default function Skills() {
         </div>
 
         {/* Categorized Skill Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {filteredCategories.map((category) => {
             const Icon = categoryIcons[category.name] || Code2;
             const isSecondary = category.accent === 'pink';
@@ -121,13 +121,13 @@ export default function Skills() {
             return (
               <div
                 key={category.name}
-                className="premium-card rounded-2xl p-6 flex flex-col justify-between group"
+                className="premium-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-3">
                     <div className="flex items-center gap-3">
                       <div
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-transform group-hover:scale-105 ${
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-transform group-hover:scale-105 shrink-0 ${
                           isSecondary
                             ? 'bg-[var(--accent-secondary-soft)] border-[var(--accent-secondary-border)] text-[var(--accent-secondary)]'
                             : 'bg-[var(--accent-primary-soft)] border-[var(--accent-primary-border)] text-[var(--accent-primary)]'
@@ -146,16 +146,16 @@ export default function Skills() {
                     </div>
                   </div>
 
-                  <p className="text-xs text-[var(--text-secondary)] mb-5 leading-relaxed">
+                  <p className="text-xs text-[var(--text-secondary)] mb-4 sm:mb-5 leading-relaxed">
                     {category.description}
                   </p>
 
                   {/* Skills Grid */}
-                  <div className="flex flex-wrap gap-2.5">
+                  <div className="flex flex-wrap gap-2 sm:gap-2.5">
                     {category.skills.map((skill) => (
                       <div
                         key={skill.name}
-                        className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] transition-all hover:-translate-y-0.5"
+                        className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] transition-all hover:-translate-y-0.5"
                       >
                         {getSkillIcon(skill.icon, isSecondary)}
                         <span className="text-xs sm:text-sm font-medium text-[var(--text-primary)]">

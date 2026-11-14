@@ -59,7 +59,7 @@ function ProjectRepoDirectories({ project }) {
   }, [ghInfo.owner, ghInfo.repo, ghInfo.branch, ghInfo.initialPath, ghInfo.isValid, ghInfo.isRepo, ghInfo.error]);
 
   return (
-    <div className="px-6 pb-4">
+    <div className="px-4 sm:px-6 pb-4">
       <div className="p-3 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] space-y-2 transition-colors duration-300">
         <div className="flex items-center justify-between gap-2 text-[11px] font-mono">
           <span className="text-[var(--text-secondary)] flex items-center gap-1.5">
@@ -128,31 +128,31 @@ export default function Projects({ onSelectProject }) {
   });
 
   return (
-    <section id="projects" className="py-20 lg:py-28 relative">
+    <section id="projects" className="py-14 xs:py-16 sm:py-20 lg:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--accent-primary)] text-xs font-mono mb-3 transition-colors duration-300">
             <Sparkles className="w-3.5 h-3.5 text-[var(--accent-secondary)]" />
             <span>SELECTED WORK</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">
             Featured <span className="text-[var(--accent-primary)]">Projects</span>
           </h2>
-          <p className="mt-3 text-base text-[var(--text-secondary)]">
+          <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)]">
             Software applications showcasing full-stack architectures, backend API development, and relational data design.
           </p>
         </div>
 
         {/* Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-10 sm:mb-12">
           {filterOptions.map((option) => (
             <button
               type="button"
               key={option}
               onClick={() => setFilter(option)}
-              className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${filter === option
+              className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-medium transition-all ${filter === option
                   ? 'bg-[var(--accent-primary)] text-white shadow-md font-semibold'
                   : 'bg-[var(--bg-card)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-color)] hover:border-[var(--accent-primary)]'
                 }`}
@@ -164,7 +164,7 @@ export default function Projects({ onSelectProject }) {
 
         {/* Responsive Project Grid */}
         <div
-          className={`grid gap-7 ${
+          className={`grid gap-6 sm:gap-7 ${
             filteredProjects.length === 1
               ? 'grid-cols-1 max-w-xl mx-auto'
               : filteredProjects.length === 2
@@ -190,7 +190,7 @@ export default function Projects({ onSelectProject }) {
                   />
 
                   {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col">
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col">
                     <div className="flex items-center justify-between gap-2 mb-3">
                       <span className="px-2.5 py-1 rounded-md ocean-badge text-[11px] font-mono">
                         {project.category}
@@ -201,7 +201,7 @@ export default function Projects({ onSelectProject }) {
                       {project.title}
                     </h3>
 
-                    <p className="mt-3 text-sm text-[var(--text-secondary)] leading-relaxed">
+                    <p className="mt-2.5 sm:mt-3 text-sm text-[var(--text-secondary)] leading-relaxed">
                       {project.description}
                     </p>
 
@@ -237,21 +237,22 @@ export default function Projects({ onSelectProject }) {
                   <ProjectRepoDirectories project={project} />
 
                   {/* Action Footer */}
-                  <div className="px-6 pb-6 pt-4 border-t border-[var(--border-color)] flex flex-wrap items-center gap-2.5">
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-3 sm:pt-4 border-t border-[var(--border-color)] flex flex-wrap items-center gap-2 sm:gap-2.5">
                     {ghInfo.isValid && targetGithubUrl ? (
                       <a
                         href={targetGithubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[var(--bg-primary)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] text-xs font-semibold transition-all"
+                        className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl bg-[var(--bg-primary)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] text-xs font-semibold transition-all"
                       >
                         <Github className="w-3.5 h-3.5 shrink-0" />
-                        <span>{ghInfo.isRepo ? 'GitHub Repository' : 'GitHub Profile'}</span>
+                        <span className="hidden xs:inline">{ghInfo.isRepo ? 'GitHub Repository' : 'GitHub Profile'}</span>
+                        <span className="xs:hidden">GitHub</span>
                       </a>
                     ) : (
-                      <span className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] text-xs font-medium opacity-75">
+                      <span className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] text-xs font-medium opacity-75">
                         <Github className="w-3.5 h-3.5 shrink-0" />
-                        <span>Repo Unavailable</span>
+                        <span>Unavailable</span>
                       </span>
                     )}
 
@@ -260,7 +261,7 @@ export default function Projects({ onSelectProject }) {
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white text-xs font-semibold shadow-md transition-all"
+                        className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white text-xs font-semibold shadow-md transition-all"
                       >
                         <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                         <span>Live Demo</span>
@@ -270,7 +271,7 @@ export default function Projects({ onSelectProject }) {
                     <button
                       type="button"
                       onClick={() => onSelectProject(project)}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[var(--accent-secondary-soft)] hover:bg-[var(--accent-secondary)] border border-[var(--accent-secondary-border)] text-[var(--accent-secondary-badge-text)] hover:text-white text-xs font-semibold transition-all ml-auto"
+                      className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl bg-[var(--accent-secondary-soft)] hover:bg-[var(--accent-secondary)] border border-[var(--accent-secondary-border)] text-[var(--accent-secondary-badge-text)] hover:text-white text-xs font-semibold transition-all ml-auto"
                     >
                       <Eye className="w-3.5 h-3.5 shrink-0" />
                       <span>View Details</span>

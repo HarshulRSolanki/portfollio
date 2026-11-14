@@ -20,7 +20,7 @@ export default function Hero({ onOpenResume }) {
       code: `const Developer = {
   name: "Solanki Harshul Rajnikant",
   role: "Full Stack Developer",
-  education: "MCA Sem 3 @ GTU",
+  education: "MCA Sem 3 @ AIMIS",
   location: "Nadiad, Gujarat, India",
   stack: {
     languages: ["Java", "Python", "C", "C++", "JS"],
@@ -72,16 +72,16 @@ async def analyze_source(source: str, lang: str):
   };
 
   return (
-    <section id="home" className="relative min-h-screen pt-28 pb-16 lg:pt-36 lg:pb-24 flex items-center">
+    <section id="home" className="relative min-h-screen pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-36 lg:pb-24 flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 items-center">
 
           {/* Left Side: Badge, Headings, Highlighted Intro, 2 CTAs & Socials */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 min-w-0 space-y-6 sm:space-y-7 text-center lg:text-left"
+            className="lg:col-span-7 min-w-0 space-y-5 sm:space-y-7 text-center lg:text-left"
           >
             {/* Availability Badge */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] text-xs sm:text-sm font-medium text-[var(--text-primary)] shadow-sm transition-colors duration-300">
@@ -93,8 +93,8 @@ async def analyze_source(source: str, lang: str):
             </div>
 
             {/* Heading & Title */}
-            <div className="space-y-3">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.12] transition-colors duration-300">
+            <div className="space-y-2.5 sm:space-y-3">
+              <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.15] sm:leading-[1.12] transition-colors duration-300">
                 Hi, I'm{" "}
                 <span className="hero-name-gradient">
                   {personalInfo.name}
@@ -102,18 +102,18 @@ async def analyze_source(source: str, lang: str):
               </h1>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-1 sm:gap-2.5">
-                <span className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--accent-primary)] transition-colors duration-300">
+                <span className="text-lg xs:text-xl sm:text-2xl font-bold tracking-tight text-[var(--accent-primary)] transition-colors duration-300">
                   {personalInfo.role}
                 </span>
                 <span className="hidden sm:inline text-[var(--border-color)]">|</span>
-                <span className="text-sm sm:text-base font-mono font-medium text-[var(--text-secondary)]">
-                  {personalInfo.currentEducation} • GTU
+                <span className="text-xs xs:text-sm sm:text-base font-mono font-medium text-[var(--text-secondary)]">
+                  {personalInfo.currentEducation} • AIMIS
                 </span>
               </div>
             </div>
 
             {/* Introduction with Theme Highlights */}
-            <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-sm xs:text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto lg:mx-0">
               <span className="text-[var(--text-primary)] font-semibold border-b border-[var(--accent-primary)]">MCA student</span> and aspiring{" "}
               <span className="text-[var(--accent-primary)] font-semibold">Full Stack Developer</span> passionate about building{" "}
               <span className="text-[var(--text-primary)] font-medium">scalable web applications</span>, developing{" "}
@@ -122,11 +122,11 @@ async def analyze_source(source: str, lang: str):
             </p>
 
             {/* Two Primary CTA Buttons */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <div className="flex flex-col xs:flex-row items-stretch xs:items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-1 sm:pt-2 w-full xs:w-auto">
               <button
                 type="button"
                 onClick={() => scrollTo('projects')}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white font-semibold text-sm shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all"
+                className="inline-flex items-center justify-center gap-2.5 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] text-white font-semibold text-sm shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all w-full xs:w-auto"
               >
                 <span>View My Projects</span>
                 <ArrowRight className="w-4 h-4" />
@@ -135,7 +135,7 @@ async def analyze_source(source: str, lang: str):
               <button
                 type="button"
                 onClick={onOpenResume}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-[var(--text-primary)] font-semibold text-sm transition-all hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center justify-center gap-2.5 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-[var(--text-primary)] font-semibold text-sm transition-all hover:-translate-y-0.5 active:translate-y-0 w-full xs:w-auto"
               >
                 <Download className="w-4 h-4 text-[var(--accent-secondary)]" />
                 <span>Download Resume</span>
@@ -143,46 +143,46 @@ async def analyze_source(source: str, lang: str):
             </div>
 
             {/* Social Links: GitHub, LinkedIn, Email */}
-            <div className="pt-2 flex items-center justify-center lg:justify-start gap-3 text-[var(--text-secondary)]">
-              <span className="text-xs font-mono uppercase tracking-wider text-[var(--text-secondary)] mr-1">Connect:</span>
+            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 text-[var(--text-secondary)]">
+              <span className="text-xs font-mono uppercase tracking-wider text-[var(--text-secondary)] mr-0.5">Connect:</span>
               <a
                 href={personalInfo.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-all text-xs font-medium"
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-all text-xs font-medium"
                 aria-label="GitHub Profile"
               >
                 <Github className="w-4 h-4 text-[var(--text-primary)]" />
-                <span className="hidden sm:inline">GitHub</span>
+                <span>GitHub</span>
               </a>
               <a
                 href={personalInfo.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-all text-xs font-medium"
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-all text-xs font-medium"
                 aria-label="LinkedIn Profile"
               >
                 <Linkedin className="w-4 h-4 text-[var(--accent-primary)]" />
-                <span className="hidden sm:inline">LinkedIn</span>
+                <span>LinkedIn</span>
               </a>
               {personalInfo.social.email ? (
                 <a
                   href={`mailto:${personalInfo.social.email}`}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] hover:text-[var(--text-primary)] transition-all text-xs font-medium"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] hover:text-[var(--text-primary)] transition-all text-xs font-medium"
                   aria-label="Send Email"
                 >
                   <Mail className="w-4 h-4 text-[var(--accent-secondary)]" />
-                  <span className="hidden sm:inline">Email</span>
+                  <span>Email</span>
                 </a>
               ) : (
                 <button
                   type="button"
                   onClick={() => scrollTo('contact')}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] hover:text-[var(--text-primary)] transition-all text-xs font-medium"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] hover:text-[var(--text-primary)] transition-all text-xs font-medium"
                   aria-label="Contact Section"
                 >
                   <Mail className="w-4 h-4 text-[var(--accent-secondary)]" />
-                  <span className="hidden sm:inline">Email</span>
+                  <span>Email</span>
                 </button>
               )}
             </div>
@@ -222,12 +222,12 @@ async def analyze_source(source: str, lang: str):
               />
 
               {/* Terminal Header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-[var(--bg-primary)] border-b border-[var(--border-color)] transition-colors duration-300">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 bg-[var(--bg-primary)] border-b border-[var(--border-color)] transition-colors duration-300">
+                <div className="flex items-center gap-1.5 sm:gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent-secondary)]/80 inline-block" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[var(--text-secondary)]/50 inline-block" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent-primary)]/80 inline-block" />
-                  <span className="ml-2 text-xs font-mono text-[var(--text-secondary)] hidden sm:inline">
+                  <span className="ml-1.5 sm:ml-2 text-xs font-mono text-[var(--text-secondary)] hidden sm:inline">
                     harshul-dev ~ workspace
                   </span>
                 </div>
@@ -243,11 +243,10 @@ async def analyze_source(source: str, lang: str):
                       type="button"
                       key={tab.key}
                       onClick={() => setActiveTab(tab.key)}
-                      className={`px-2.5 py-1 text-[11px] font-mono rounded-md transition-colors ${
-                        activeTab === tab.key
+                      className={`px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-mono rounded-md transition-colors ${activeTab === tab.key
                           ? 'bg-[var(--accent-primary)] text-white font-semibold'
                           : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
-                      }`}
+                        }`}
                     >
                       {tab.label}
                     </button>

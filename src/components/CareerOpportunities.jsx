@@ -15,28 +15,28 @@ export default function CareerOpportunities() {
   };
 
   return (
-    <section id="career" className="py-20 lg:py-28 relative">
+    <section id="career" className="py-14 xs:py-16 sm:py-20 lg:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--accent-primary)] text-xs font-mono mb-3 transition-colors duration-300">
             <Sparkles className="w-3.5 h-3.5 text-[var(--accent-secondary)]" />
             <span>CAREER &amp; OPPORTUNITIES</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">
             {careerOpportunities.headline.split(' ').slice(0, 2).join(' ')}{' '}
             <span className="text-[var(--accent-primary)]">
               {careerOpportunities.headline.split(' ').slice(2).join(' ')}
             </span>
           </h2>
-          <p className="mt-3 text-base text-[var(--text-secondary)] leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
             {careerOpportunities.description}
           </p>
         </div>
 
         {/* Three Opportunity Focus Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
           {careerOpportunities.tracks.map((track, idx) => {
             const Icon = iconMap[track.icon] || Briefcase;
             const isSecondary = track.accent === 'pink';
@@ -44,7 +44,7 @@ export default function CareerOpportunities() {
             return (
               <div
                 key={track.title}
-                className="premium-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between group relative overflow-hidden"
+                className="premium-card rounded-2xl p-5 sm:p-7 flex flex-col justify-between group relative overflow-hidden"
               >
                 {/* Top accent bar */}
                 <div

@@ -156,19 +156,19 @@ export default function Contact({ onShowToast }) {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-28 relative">
+    <section id="contact" className="py-14 xs:py-16 sm:py-20 lg:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--accent-primary)] text-xs font-mono mb-3 transition-colors duration-300">
             <Sparkles className="w-3.5 h-3.5 text-[var(--accent-secondary)]" />
             <span>GET IN TOUCH</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">
             Let's Build Something <span className="text-[var(--accent-primary)]">Amazing Together.</span>
           </h2>
-          <p className="mt-4 text-base text-[var(--text-secondary)] leading-relaxed">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
             Actively seeking Full Stack Developer and Software Development Internships. Reach out to discuss opportunities or collaborate on projects.
           </p>
         </div>
@@ -177,19 +177,19 @@ export default function Contact({ onShowToast }) {
 
           {/* Left Column: Direct Contact Info */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="premium-card rounded-2xl p-6 sm:p-8 space-y-6">
+            <div className="premium-card rounded-2xl p-5 sm:p-8 space-y-6">
               <div>
-                <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">Contact Channels</h3>
-                <p className="text-sm text-[var(--text-secondary)]">
+                <h3 className="text-lg sm:text-xl font-bold text-[var(--text-primary)] mb-2">Contact Channels</h3>
+                <p className="text-xs sm:text-sm text-[var(--text-secondary)]">
                   Connect directly via email, LinkedIn, or GitHub.
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {/* Location */}
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] transition-colors duration-300">
-                  <div className="w-10 h-10 rounded-xl bg-[var(--accent-primary-soft)] border border-[var(--accent-primary-border)] flex items-center justify-center text-[var(--accent-primary)] shrink-0">
-                    <MapPin className="w-5 h-5" />
+                <div className="flex items-start gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] transition-colors duration-300">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[var(--accent-primary-soft)] border border-[var(--accent-primary-border)] flex items-center justify-center text-[var(--accent-primary)] shrink-0">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                   <div>
                     <p className="text-xs font-mono text-[var(--text-secondary)]">Location</p>
@@ -198,17 +198,17 @@ export default function Contact({ onShowToast }) {
                 </div>
 
                 {/* Email Contact */}
-                <div className="flex items-start justify-between gap-3 p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] transition-colors">
-                  <div className="flex items-start gap-4 min-w-0">
-                    <div className="w-10 h-10 rounded-xl bg-[var(--accent-secondary-soft)] border border-[var(--accent-secondary-border)] flex items-center justify-center text-[var(--accent-secondary)] shrink-0">
-                      <Mail className="w-5 h-5" />
+                <div className="flex items-start justify-between gap-3 p-3.5 sm:p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] transition-colors">
+                  <div className="flex items-start gap-3 sm:gap-4 min-w-0">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[var(--accent-secondary-soft)] border border-[var(--accent-secondary-border)] flex items-center justify-center text-[var(--accent-secondary)] shrink-0">
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                     <div className="min-w-0">
                       <p className="text-xs font-mono text-[var(--text-secondary)]">Email</p>
                       {hasEmail ? (
                         <a
                           href={`mailto:${fallbackMailAddress}`}
-                          className="text-sm font-semibold text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors break-all mt-0.5 block"
+                          className="text-xs sm:text-sm font-semibold text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors break-all mt-0.5 block"
                         >
                           {fallbackMailAddress}
                         </a>
@@ -234,9 +234,9 @@ export default function Contact({ onShowToast }) {
 
                 {/* Optional Phone */}
                 {personalInfo.social.phone && (
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] transition-colors duration-300">
-                    <div className="w-10 h-10 rounded-xl bg-[var(--accent-primary-soft)] border border-[var(--accent-primary-border)] flex items-center justify-center text-[var(--accent-primary)] shrink-0">
-                      <Phone className="w-5 h-5" />
+                  <div className="flex items-start gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] transition-colors duration-300">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[var(--accent-primary-soft)] border border-[var(--accent-primary-border)] flex items-center justify-center text-[var(--accent-primary)] shrink-0">
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                     <div>
                       <p className="text-xs font-mono text-[var(--text-secondary)]">Phone</p>
@@ -261,9 +261,9 @@ export default function Contact({ onShowToast }) {
                     href={personalInfo.social.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] transition-all group"
+                    className="flex items-center justify-between p-3 sm:p-3.5 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] transition-all group"
                   >
-                    <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-2 sm:gap-2.5">
                       <Linkedin className="w-4 h-4 text-[var(--accent-primary)]" />
                       <span className="text-xs font-semibold">LinkedIn</span>
                     </div>
@@ -274,9 +274,9 @@ export default function Contact({ onShowToast }) {
                     href={personalInfo.social.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-[var(--text-primary)] transition-all group"
+                    className="flex items-center justify-between p-3 sm:p-3.5 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-[var(--text-primary)] transition-all group"
                   >
-                    <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-2 sm:gap-2.5">
                       <Github className="w-4 h-4 text-[var(--text-primary)]" />
                       <span className="text-xs font-semibold">GitHub</span>
                     </div>
@@ -292,19 +292,19 @@ export default function Contact({ onShowToast }) {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="premium-card rounded-2xl p-6 sm:p-8 space-y-5"
+              className="premium-card rounded-2xl p-5 sm:p-8 space-y-4 sm:space-y-5"
             >
               <div className="flex items-center justify-between gap-2 pb-3 border-b border-[var(--border-color)]">
                 <div className="flex items-center gap-2.5">
                   <MessageSquare className="w-5 h-5 text-[var(--accent-primary)]" />
-                  <h3 className="text-lg font-bold text-[var(--text-primary)]">Send a Message</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-[var(--text-primary)]">Send a Message</h3>
                 </div>
-                <span className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)]">
+                <span className="text-[10px] sm:text-[11px] font-mono px-2 sm:px-2.5 py-1 rounded-md bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)]">
                   {hasEndpoint ? 'Live Service Active' : hasEmail ? 'Mail Client Mode' : 'Configurable Form'}
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 {/* Name */}
                 <div>
                   <label htmlFor="contact-name" className="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
@@ -317,7 +317,7 @@ export default function Contact({ onShowToast }) {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your full name"
-                    className={`w-full px-4 py-3 rounded-xl bg-[var(--bg-primary)] border ${
+                    className={`w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-[var(--bg-primary)] border ${
                       errors.name
                         ? 'border-[var(--accent-secondary)]'
                         : 'border-[var(--border-color)] hover:border-[var(--accent-secondary)] focus:border-[var(--accent-primary)]'
@@ -338,7 +338,7 @@ export default function Contact({ onShowToast }) {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="you@company.com"
-                    className={`w-full px-4 py-3 rounded-xl bg-[var(--bg-primary)] border ${
+                    className={`w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-[var(--bg-primary)] border ${
                       errors.email
                         ? 'border-[var(--accent-secondary)]'
                         : 'border-[var(--border-color)] hover:border-[var(--accent-secondary)] focus:border-[var(--accent-primary)]'
@@ -360,7 +360,7 @@ export default function Contact({ onShowToast }) {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Full Stack Developer Internship Inquiry"
-                  className={`w-full px-4 py-3 rounded-xl bg-[var(--bg-primary)] border ${
+                  className={`w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-[var(--bg-primary)] border ${
                     errors.subject
                       ? 'border-[var(--accent-secondary)]'
                       : 'border-[var(--border-color)] hover:border-[var(--accent-secondary)] focus:border-[var(--accent-primary)]'
@@ -381,7 +381,7 @@ export default function Contact({ onShowToast }) {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Share internship details, role requirements, or project ideas..."
-                  className={`w-full px-4 py-3 rounded-xl bg-[var(--bg-primary)] border ${
+                  className={`w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-[var(--bg-primary)] border ${
                     errors.message
                       ? 'border-[var(--accent-secondary)]'
                       : 'border-[var(--border-color)] hover:border-[var(--accent-secondary)] focus:border-[var(--accent-primary)]'

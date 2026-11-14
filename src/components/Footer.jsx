@@ -27,7 +27,7 @@ export default function Footer() {
   return (
     <>
       <footer className="border-t border-[var(--border-color)] bg-[var(--bg-primary)] relative z-10 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pb-8 border-b border-[var(--border-color)]">
 
             {/* Developer Logo & Short Professional Tagline */}
@@ -111,11 +111,11 @@ export default function Footer() {
         type="button"
         onClick={scrollToTop}
         aria-label="Back to top"
-        className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 p-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-[var(--accent-primary)] hover:text-white hover:bg-[var(--accent-primary)] shadow-xl transition-all duration-300 ${
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 p-2.5 sm:p-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-secondary)] text-[var(--accent-primary)] hover:text-white hover:bg-[var(--accent-primary)] shadow-xl transition-all duration-300 ${
           showBackToTop ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
       >
-        <ArrowUp className="w-5 h-5" />
+        <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
     </>
   );
